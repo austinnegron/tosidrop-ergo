@@ -189,7 +189,7 @@
   }
   #walletButton{
     width: auto;
-    padding: 0 20px;
+    padding: 10px;
     height: 35px;
     background-color: white;
     border: none;
@@ -297,6 +297,22 @@
     border-radius: 10px;
     padding: 5px 20px;
   }
+  .popup-form-3{
+    margin-top: 5%;
+    margin-left: 70%;
+    background-color: white;
+    width: 370px;
+    border-radius: 10px;
+    padding: 5px 20px;
+  }
+  .popup-form-4{
+    margin-top: 5%;
+    margin-left: 70%;
+    background-color: white;
+    width: 370px;
+    border-radius: 10px;
+    padding: 5px 20px;
+  }
   .balance{
     width: 240px;
     text-align: right;
@@ -340,6 +356,32 @@
     color: black;
     font-size: 13px;
     font-weight: 400;
+  }
+  .selectWallet{
+    border-radius: 10px;
+    background-color: #F0F0F0;
+    font-size: 12px;
+    height: 35px;
+    text-align: left;
+    text-decoration: none;
+    border: none;
+    width: 100%;
+    margin: 15px 0;
+  }
+  .walletLogo{
+    width: 20px;
+  }
+  .popup-subtitle-wallet{
+    font-weight: 400;
+    font-size: 12px;
+    color: #5c7cc5;
+    padding: 0 1%;
+  }
+  .walletName{
+    display: inline-block;
+    padding-top: 10px;
+    padding-left: 10px;
+    line-height: 1em;
   }
 </style>
 <body>
@@ -394,11 +436,25 @@
         <p id="file-chosen">No file chosen</p>
       </div>
     </div>
+    <div class="popup-background" id="popup-background-3">
+      <div class="popup-form-3">
+        <div class="align-right"><button class="popup-close" onclick="closePopup3()"><i class="fa-solid fa-xmark"></i></button></div>
+        <p class="popup-title">Select a wallet</p>
+        <button class="selectWallet" onclick="openPopup4()"><span class="walletName">Nautilus Wallet</span><img src="images/nautilus.png" style="float: right; width: 30px;"></button>
+      </div>
+    </div>
+    <div class="popup-background" id="popup-background-4">
+      <div class="popup-form-4">
+        <div class="align-right"><button class="popup-close" onclick="closePopup4();connect(this);"><i class="fa-solid fa-xmark"></i></button></div>
+        <p class="popup-title"><i class="fa-solid fa-check"></i>&emsp;Connected to Nautilus Wallet</p>
+        <p class="popup-subtitle-wallet">Successfully connected with 23jdsflw34nzkf..34vxfh3</p>
+      </div>
+    </div>
   </nav>
   <div class="col-2">
   	<header>
       <div id="head">
-        <button type="button" id="walletButton" onclick="connect(this)">Connect Wallet</button>
+        <button type="button" id="walletButton" onclick="openPopup3()">Connect Wallet</button>
         <button type="button" id="menuButton"><i class="fa-regular fa-circle-question"></i></button>
         <button type="button" id="menuButton"><i class="fas fa-bars"></i></button>
         <button type="button" id="menuButton"><i class="fa-solid fa-sun"></i></button>
@@ -449,6 +505,19 @@
       document.getElementById("selectAddressButton").innerHTML = "Addresses Uploaded&emsp;<i class=\"fa-regular fa-circle-check\"></i>"
     }  
   }
+  function openPopup3(){
+    document.getElementById("popup-background-3").style.display = "block";
+  }
+  function closePopup3(){
+    document.getElementById("popup-background-3").style.display = "none";
+  }
+  function openPopup4(){
+    document.getElementById("popup-background-4").style.display = "block";
+    document.getElementById("popup-background-3").style.display = "none";
+  }
+  function closePopup4(){
+    document.getElementById("popup-background-4").style.display = "none";
+  }
   var chooseToken = function(param){
     document.getElementById("selectTokenButton").innerHTML = "<img src=\"images/" + param.id + ".png\" class=\"token-logo\">" + "&emsp;" + param.id + "&emsp;<i class=\"far fa-angle-down\"></i>";
     document.getElementById("balance").style.display = "block";
@@ -472,6 +541,7 @@
   var connect = function(param){
     var balance = 206.1944;
     var address = "23jdsf..fh3";
-    param.innerHTML = "<span id=\"balanceInButton\">" + balance + " ERG </span><span id=\"addressInButton\">" + address + "</span>";
+    document.getElementById("walletButton").innerHTML = "<span id=\"balanceInButton\">" + balance + " ERG </span><span id=\"addressInButton\">" + address + "</span>";
+    document.getElementById("walletButton").disabled = true;
   }
 </script>
