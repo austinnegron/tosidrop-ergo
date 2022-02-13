@@ -3,6 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"> 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/589f40fe56.js" crossorigin="anonymous"></script>
 <style>
   * {
@@ -43,7 +44,7 @@
   }
   .nav-buttons{
     margin-left: 150px;
-    margin-top: 10%;
+    margin-top: 15%;
   }
   .logo{
     padding: 2%;
@@ -51,8 +52,22 @@
   .mainButton {
     width: 240px;
     height: 50px;
-    margin: 15px;
+    margin-right: 15px;
     background: linear-gradient(45deg, rgba(52,154,211,1) 0%, rgba(127,97,185,1) 100%);  border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  .mainButton2 {
+    width: 240px;
+    height: 50px;
+    margin-top: 30px;
+    margin-right: 15px;
+    background: linear-gradient(225deg, rgba(92,124,197,1) 0%, rgba(127,97,185,1) 100%); border: none;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -92,7 +107,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    margin: auto;
+    margin-left: 7%;
+    margin-top: 4%;
     border: 4px solid transparent;
     border-top-color: #ffffff;
     border-radius: 50%;
@@ -107,7 +123,7 @@
       transform: rotate(1turn);
     }
   }
-  input[type=text] {
+  .transInput {
     width: 550px;
     height: 40px;
     padding: 12px 20px;
@@ -205,6 +221,114 @@
   color: gray;
   opacity: 1; 
   }
+  .popup-background{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.2);
+    transition: opacity 500ms;
+    z-index:999;
+    display: none;
+  }
+  .popup-form{
+    margin-top: 12%;
+    margin-left: 8%;
+    background-color: white;
+    width: 370px;
+    border-radius: 10px;
+    padding: 5px 20px;
+  }
+  .popup-title{
+    font-weight: 500;
+    font-size: 12px;
+    padding: 0 1%;
+  }
+  .popup-subtitle{
+    font-weight: 400;
+    font-size: 10px;
+    color: gray;
+    padding: 0 1%;
+  }
+  .popup-input {
+    width: 100%;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5% 0;
+  }
+  .popup-close{
+    position: fixed;
+    transition: opacity 500ms;
+    z-index:999;
+    border: none;
+    float: right;
+    background: white;
+  }
+  .align-right{
+    text-align: right;
+    margin: 5px 20px;
+  }
+  .token-logo{
+    width: 20px;
+  }
+  .popup-value{
+    text-align: right;
+    font-weight: 500;
+    font-size: 12px;
+  }
+  td{
+    padding: 10px 0;
+  }
+  tr:hover td{
+    border-bottom: 1px solid lightgray;
+  }
+  table{
+    width: 100%;
+  }
+  .popup-form-2{
+    margin-top: 18%;
+    margin-left: 8%;
+    background-color: white;
+    width: 370px;
+    border-radius: 10px;
+    padding: 5px 20px;
+  }
+  .balance{
+    width: 240px;
+    text-align: right;
+    font-weight: 400;
+    font-size: 10px;
+    color: gray;
+    position: absolute;
+    padding-right: 10px; 
+    z-index:999;
+    display: none;
+    margin-top: 4px;
+  }
+  label {
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    margin-top: 40px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    height: 40px;
+  }
+  #file-chosen{
+    font-weight: 400;
+    font-size: 10px;
+    color: gray;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 </style>
 <body>
   <nav class="col-1">
@@ -213,8 +337,50 @@
       <img src="images/TosiDrop.png" style="width: 60px;">
     </div>
     <div class="nav-buttons">
-      <button class="mainButton">Choose Token&emsp;<i class="far fa-angle-down"></i></button><br>
-      <button class="mainButton">Add Addresses</button>
+      <button class="mainButton" onclick="openPopup()" id="selectTokenButton">Select Token&emsp;<i class="far fa-angle-down"></i></button><br>
+      <p class="balance" id="balance">Balance: <span id="balanceValue"></span> (<span style="color: orange;">Max</span>)</p>
+      <button class="mainButton2" onclick="openPopup2()"><span id="selectAddressButton">Add Addresses</span></button>
+    </div>
+    <div class="popup-background" id="popup-background">
+      <div class="popup-form">
+        <div class="align-right"><button class="popup-close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></button></div>
+        <p class="popup-title">Select a Token</p>
+        <p class="popup-subtitle">Select a Token or paste policy id</p>
+        <input type="text" id="search" class="popup-input" placeholder="Search name or policy id">
+        <div id="tokens">
+          <p class="popup-subtitle">Token Name</p>
+          <table id="table">
+            <tr id="ERG" onclick="chooseToken(this);closePopup();">
+              <td><img src="images/erg.png" class="token-logo"></td>
+              <td class="popup-title">ERG</td>
+              <td class="popup-subtitle">23jdsflw34nzkf..34vxfh3</td>
+              <td class="popup-value" id="ERG-balance">206<span class="popup-subtitle">.1944</span></td>
+            </tr>
+            <tr id="NETA" onclick="chooseToken(this);closePopup()">
+              <td><img src="images/neta.png" class="token-logo"></td>
+              <td class="popup-title">NETA</td>
+              <td class="popup-subtitle">45sdf223gcfq..24sdg</td>
+              <td class="popup-value" id="NETA-balance">80,088<span class="popup-subtitle">.9367</span></td>
+            </tr>
+            <tr id="TOSI" onclick="chooseToken(this);closePopup()">
+              <td><img src="images/tosi.png" class="token-logo"></td>
+              <td class="popup-title">TOSI</td>
+              <td class="popup-subtitle">6sdnfla3jn..84lkm</td>
+              <td class="popup-value" id="TOSI-balance">15,027<span class="popup-subtitle">.67</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="popup-background" id="popup-background-2">
+      <div class="popup-form-2">
+        <div class="align-right"><button class="popup-close" onclick="closePopup2()"><i class="fa-solid fa-xmark"></i></button></div>
+        <p class="popup-title">Add Adresses</p>
+        <p class="popup-subtitle">Upload list of addresses</p>
+        <input type="file" id="actual-btn" class="fileButton" name="filename" hidden/>
+        <label for="actual-btn">Upload .txt file&emsp;<i class="fa-solid fa-arrow-up-from-line"></i></label>
+        <p id="file-chosen">No file chosen</p>
+      </div>
     </div>
   </nav>
   <div class="col-2">
@@ -227,13 +393,13 @@
       </div>
     </header>
     <main class="content">
-      <input type="text" id="addresses" name="addresses" placeholder="addresses.txt">
+      <input type="text" id="addresses" class="transInput" placeholder="addresses.txt">
       <p class="subtitle"><img src="images/VectorTick.png" style="width: 40px;">4000 Wallets Added!</p>
       <div id="parameters">
         <p class="title">Airdrop Parameters</p>
         <div class="flex-container">
           <div class="left">Tokens Per Wallet</div>
-          <div class="right"><input type="text" id="amount" name="amount" placeholder="enter amount"></div>
+          <div class="right"><input type="text" id="amount" class="transInput" placeholder="enter amount"></div>
         </div>
         <div class="flex-container">
           <div class="left">Total Tokens:</div>
@@ -249,8 +415,47 @@
     </main>
   	<footer>
       <button type="button" class="button" onclick="this.classList.toggle('button--loading')" style="vertical-align: middle;">
-        <span class="button__text">&emsp;<i class="fa-solid fa-plane-departure"></i>&emsp;&emsp;&emsp;Launch AirDrop</span>
+        <span class="button__text">&emsp;<i class="fa-solid fa-plane-departure"></i></span>&emsp;&emsp;&emsp;Launch AirDrop
       </button>
     </footer>
   </div>
 </body>
+<script type="text/javascript">
+  function openPopup(){
+    document.getElementById("popup-background").style.display = "block";
+  }
+  function closePopup(){
+    document.getElementById("popup-background").style.display = "none";
+  }
+  function openPopup2(){
+    document.getElementById("popup-background-2").style.display = "block";
+  }
+  function closePopup2(){
+    document.getElementById("popup-background-2").style.display = "none";
+    var file = document.getElementById("actual-btn");
+    if (file.files.length != 0) {
+      document.getElementById("selectAddressButton").innerHTML = "Addresses Uploaded&emsp;<i class=\"fa-regular fa-circle-check\"></i>"
+    }  
+  }
+  var chooseToken = function(param){
+    document.getElementById("selectTokenButton").innerHTML = "<img src=\"images/" + param.id + ".png\" class=\"token-logo\">" + "&emsp;" + param.id + "&emsp;<i class=\"far fa-angle-down\"></i>";
+    document.getElementById("balance").style.display = "block";
+    document.getElementById("balanceValue").innerHTML = document.getElementById(param.id + "-balance").innerHTML;
+  }
+  var $rows = $('#table tr');
+  $('#search').keyup(function() {
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+    
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+  });
+  const actualBtn = document.getElementById('actual-btn');
+  const fileChosen = document.getElementById('file-chosen');
+
+  actualBtn.addEventListener('change', function(){
+    fileChosen.textContent = this.files[0].name
+  })
+
+</script>
