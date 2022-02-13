@@ -188,7 +188,8 @@
     text-align: right;
   }
   #walletButton{
-    width: 150px;
+    width: auto;
+    padding: 0 20px;
     height: 35px;
     background-color: white;
     border: none;
@@ -196,7 +197,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 10px;
+    font-size: 13px;
     cursor: pointer;
     border-radius: 5px;
     margin: 5px;
@@ -329,6 +330,17 @@
     text-align: center;
     margin-bottom: 20px;
   }
+  #addressInButton{
+    border-radius: 5px;
+    background-color: #F0F0F0;
+    padding: 7px;
+    font-size: 12px;
+  }
+  #balanceInButton{
+    color: black;
+    font-size: 13px;
+    font-weight: 400;
+  }
 </style>
 <body>
   <nav class="col-1">
@@ -386,7 +398,7 @@
   <div class="col-2">
   	<header>
       <div id="head">
-        <button type="button" id="walletButton">Connect Wallet</button>
+        <button type="button" id="walletButton" onclick="connect(this)">Connect Wallet</button>
         <button type="button" id="menuButton"><i class="fa-regular fa-circle-question"></i></button>
         <button type="button" id="menuButton"><i class="fas fa-bars"></i></button>
         <button type="button" id="menuButton"><i class="fa-solid fa-sun"></i></button>
@@ -457,5 +469,9 @@
   actualBtn.addEventListener('change', function(){
     fileChosen.textContent = this.files[0].name
   })
-
+  var connect = function(param){
+    var balance = 206.1944;
+    var address = "23jdsf..fh3";
+    param.innerHTML = "<span id=\"balanceInButton\">" + balance + " ERG </span><span id=\"addressInButton\">" + address + "</span>";
+  }
 </script>
