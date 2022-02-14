@@ -314,6 +314,14 @@
     border-radius: 10px;
     padding: 5px 20px;
   }
+  .popup-form-5{
+    margin-top: 5%;
+    margin-left: 70%;
+    background-color: white;
+    width: calc(185px + (370 - 185) * ((100vw - 320px) / (1600 - 320)));
+    border-radius: 10px;
+    padding: 5px 20px;
+  }
   .balance{
     width: 240px;
     text-align: right;
@@ -375,14 +383,34 @@
   .popup-subtitle-wallet{
     font-weight: 400;
     font-size: 12px;
-    color: #5c7cc5;
+    color: black;
     padding: 0 1%;
   }
   .walletName{
     display: inline-block;
-    padding-top: 10px;
+    padding-top: 7.5px;
     padding-left: 10px;
     line-height: 1em;
+  }
+  .walletDisconnect{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #189ffb;
+    font-size: 12px;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 5px;
+  }
+  .disconnectButton{
+    border-radius: 10px;
+    border: 2px solid #273685;
+    color: #273685;
+    background-color: white;
+    padding: 5px 20px;
+    margin: 5px;
+    margin-left: 20px;
+    text-align: right;
   }
 </style>
 <body>
@@ -441,7 +469,7 @@
       <div class="popup-form-3">
         <div class="align-right"><button class="popup-close" onclick="closePopup3()"><i class="fa-solid fa-xmark"></i></button></div>
         <p class="popup-title">Select a wallet</p>
-        <button class="selectWallet" onclick="openPopup4()"><span class="walletName">Yoroi Wallet</span><img src="images/yoroi.png" style="float: right; width: 30px;"></button>
+        <button class="selectWallet" onclick="openPopup4()"><span class="walletName">Yoroi Wallet</span><img src="images/yoroi.png" style="float: right; width: 25px;"></button>
       </div>
     </div>
     <div class="popup-background" id="popup-background-4">
@@ -449,6 +477,20 @@
         <div class="align-right"><button class="popup-close" onclick="closePopup4();connect(this);"><i class="fa-solid fa-xmark"></i></button></div>
         <p class="popup-title"><i class="fa-solid fa-check"></i>&emsp;Connected to Yoroi Wallet</p>
         <p class="popup-subtitle-wallet">Successfully connected with 23jdsflw34nzkf..34vxfh3</p>
+      </div>
+    </div>
+    <div class="popup-background" id="popup-background-5">
+      <div class="popup-form-5">
+        <div class="align-right"><button class="popup-close" onclick="closePopup5()"><i class="fa-solid fa-xmark"></i></button></div>
+        <p class="popup-title">Your Wallet</p>
+        <div class="walletDisconnect">
+          <p class="popup-subtitle-wallet">Connected with Yoroi Wallet</p>
+          <div style="display: inline-flex;">
+            <div style="display: inline-block; margin: 5px;"><img src="images/yoroi.png" style="width: 25px;"></div>
+            <div style="display: inline-block; "><p class="popup-subtitle-wallet">23jdsflw34nzkf..34vxfh3</p></div>
+            <div style="display: inline-block; "><button class="disconnectButton">Disconnect</button></div>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -519,6 +561,12 @@
   function closePopup4(){
     document.getElementById("popup-background-4").style.display = "none";
   }
+  function openPopup5(){
+    document.getElementById("popup-background-5").style.display = "block";
+  }
+  function closePopup5(){
+    document.getElementById("popup-background-5").style.display = "none";
+  }
   var chooseToken = function(param){
     document.getElementById("selectTokenButton").innerHTML = "<img src=\"images/" + param.id + ".png\" class=\"token-logo\">" + "&emsp;" + param.id + "&emsp;<i class=\"far fa-angle-down\"></i>";
     document.getElementById("balance").style.display = "block";
@@ -543,6 +591,6 @@
     var balance = 206.1944;
     var address = "23jdsf..fh3";
     document.getElementById("walletButton").innerHTML = "<span id=\"balanceInButton\">" + balance + " ERG </span><span id=\"addressInButton\">" + address + "</span>";
-    document.getElementById("walletButton").disabled = true;
+    document.getElementById("walletButton").setAttribute('onclick','openPopup5()');
   }
 </script>
