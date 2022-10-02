@@ -63,10 +63,13 @@
     border-radius: 8px;
   }
   .mainButton2 {
-    width: calc(100px + (240 - 100) * ((100vw - 320px) / (1600 - 320)));
+    /* width: calc(100px + (240 - 100) * ((100vw - 320px) / (1600 - 320))); */
+    width: calc(275px + (550 - 275) * ((100vw - 320px) / (1600 - 320)));
     height: calc(30px + (50 - 30) * ((100vw - 320px) / (1600 - 320)));
     margin-top: calc(10px + (30 - 10) * ((100vw - 320px) / (1600 - 320)));
     margin-right: 15px;
+
+    padding: 12px 20px;
     background: linear-gradient(225deg, rgba(92,124,197,1) 0%, rgba(127,97,185,1) 100%); border: none;
     text-align: center;
     text-decoration: none;
@@ -76,6 +79,10 @@
     cursor: pointer;
     border-radius: 8px;
   }
+
+ 
+  
+
   .button {
     width: calc(170px + (340 - 170) * ((100vw - 320px) / (1600 - 320)));
     height: calc(25px + (50 - 25) * ((100vw - 320px) / (1600 - 320)));
@@ -89,6 +96,7 @@
     color: white;
     cursor: pointer;
     border-radius: 8px;
+    text-align: center;
     position: relative;
   }  
   .button__text {
@@ -139,7 +147,8 @@
   }
   #parameters{
     width: calc(275px + (550 - 275) * ((100vw - 320px) / (1600 - 320)));
-    height: calc(115px + (230 - 115) * ((100vw - 320px) / (1600 - 320)));
+   /* height: calc(115px + (230 - 115) * ((100vw - 320px) / (1600 - 320))); */
+    height: calc(140px + (255 - 115) * ((100vw - 320px) / (1600 - 320)));
     background: linear-gradient(0deg, rgba(92,124,197,1) 0%, rgba(127,97,185,1) 100%);    
     border-radius: 10px;
     color: white;
@@ -419,11 +428,17 @@
       <img src="images/Vector.png" style="width: 20px;">
       <img src="images/TosiDrop.png" style="width: 60px;">
     </div>
-    <div class="nav-buttons">
-      <button class="mainButton" onclick="openPopup()" id="selectTokenButton">Select Token&emsp;<i class="fa-solid fa-angle-down"></i></button><br>
+        <div class="nav-buttons">
+    <!--  <button class="mainButton" onclick="openPopup()" id="selectTokenButton">Select Token&emsp;<i class="fa-solid fa-angle-down"></i></button> -->
+      <br>
+       <br>
       <p class="balance" id="balance">Balance: <span id="balanceValue"></span> (<span style="color: orange;">Max</span>)</p>
-      <button class="mainButton2" onclick="openPopup2()"><span id="selectAddressButton">Add Addresses</span></button>
-    </div>
+      <br>
+      <br>
+      <br>    
+      <button class="mainButton" onclick="openPopup()" id="selectTokenButton">Select Token&emsp;<i class="fa-solid fa-angle-down"></i></button>
+
+    </div> 
     <div class="popup-background" id="popup-background">
       <div class="popup-form">
         <div class="align-right"><button class="popup-close" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></button></div>
@@ -459,7 +474,7 @@
       <div class="popup-form-2">
         <div class="align-right"><button class="popup-close" onclick="closePopup2()"><i class="fa-solid fa-xmark"></i></button></div>
         <p class="popup-title">Add Adresses</p>
-        <p class="popup-subtitle">Upload list of addresses</p>
+        <p class="popup-subtitle">Upload list of addresses, number of tokens to claim, and frequency of claiming.</p>
         <input type="file" id="actual-btn" class="fileButton" name="filename" hidden/>
         <label for="actual-btn">Upload .txt file&emsp;<i class="fa-solid fa-arrow-up-from-line"></i></label>
         <p id="file-chosen">No file chosen</p>
@@ -504,17 +519,29 @@
       </div>
     </header>
     <main class="content">
-      <input type="text" id="addresses" class="transInput" placeholder="addresses.txt">
-      <p class="subtitle"><img src="images/VectorTick.png" style="width: 40px;">4000 Wallets Added!</p>
+    <!--  <input type="text" id="addresses" class="transInput" placeholder="addresses.txt"> -->
+      
+       <button class="mainButton2" onclick="openPopup2()"><span id="selectAddressButton">Upload Addresses</span></button>
+
+
+      <br>
+      <br>
+      <br>
+   <!--   <p class="subtitle"><img src="images/VectorTick.png" style="width: 40px;">4000 Wallets Added!</p> -->
       <div id="parameters">
         <p class="title">Airdrop Parameters</p>
         <div class="flex-container">
-          <div class="left">Tokens Per Wallet</div>
-          <div class="right"><input type="text" id="amount" class="transInput" placeholder="enter amount"></div>
+          <div class="left">Addresses:</div>
+          <div class="right">35</div>
+          
         </div>
         <div class="flex-container">
           <div class="left">Total Tokens:</div>
-          <div class="right">2,000,000 TOSI</div>
+          <div class="right">2,000,000 COMET</div>
+        </div>
+        <div class="flex-container">
+          <div class="left">Frequency:</div>
+          <div class="right">Every 5 days</div>
         </div>
       </div>
       <div id="fee">
@@ -526,7 +553,7 @@
     </main>
   	<footer>
       <button type="button" class="button" onclick="this.classList.toggle('button--loading')" style="vertical-align: middle;">
-        <span class="button__text">&emsp;<i class="fa-solid fa-plane-departure"></i></span>&emsp;&emsp;&emsp;Launch AirDrop
+        <span class="button__text">Submit
       </button>
     </footer>
   </div>
