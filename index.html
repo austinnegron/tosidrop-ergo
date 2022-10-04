@@ -132,14 +132,15 @@
     }
   }
   .transInput {
-    width: calc(275px + (550 - 275) * ((100vw - 320px) / (1600 - 320)));
-    height: calc(20px + (40 - 20) * ((100vw - 320px) / (1600 - 320)));
+    width: calc(25px + (300 - 275) * ((100vw - 320px) / (1600 - 320)));
+    height: calc(10px + (30 - 20) * ((100vw - 320px) / (1600 - 320)));
     padding: 12px 20px;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.3);
     border: 2px;
     border-radius: 2px;
-    margin-left: 30px;
+    margin-left: 2px;
+    text-align: center;
   }
   #amount{
     width: calc(75px + (150 - 75) * ((100vw - 320px) / (1600 - 320)));;
@@ -155,6 +156,8 @@
     font-weight: 400;
     margin-left: calc(15px + (30 - 15) * ((100vw - 320px) / (1600 - 320)));
   }
+
+
   .flex-container {
     display: flex;
     flex-direction: row;
@@ -519,10 +522,13 @@
       </div>
     </header>
     <main class="content">
-    <!--  <input type="text" id="addresses" class="transInput" placeholder="addresses.txt"> -->
-      
-       <button class="mainButton2" onclick="openPopup2()"><span id="selectAddressButton">Upload Addresses</span></button>
+   
 
+      <div id="fee">
+      
+          <button class="mainButton2" onclick="openPopup2()"><span id="selectAddressButton">Upload Addresses</span></button>
+
+        </div>
 
       <br>
       <br>
@@ -541,7 +547,8 @@
         </div>
         <div class="flex-container">
           <div class="left">Frequency:</div>
-          <div class="right">Every 5 days</div>
+          <div class="right">Every  <input type="text" id="addresses" class="transInput" placeholder="X">  days</div>
+       
         </div>
       </div>
       <div id="fee">
@@ -549,6 +556,10 @@
           <div class="left">Fee</div>
           <div class="right">4 ERG</div>
         </div>
+
+        <br>
+
+
       </div>
     </main>
   	<footer>
